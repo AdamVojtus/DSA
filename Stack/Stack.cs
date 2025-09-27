@@ -1,20 +1,20 @@
 ﻿
 namespace Stack
 {
-    public class Stack
+    public class Stack<T>
     {
         private int count;
-        private int[] items;
+        private T[] items;
 
         public int Count => count;
 
         public Stack(int size = 10)
         {
-            items = [size];
+            items = new T[size];
             count = 0;
         }
 
-        public int Pop()
+        public T Pop()
         {
             var item = items[count];
             Array.Clear(items, count, 1);
@@ -22,7 +22,7 @@ namespace Stack
             return item;
         }
 
-        public void Push(int item)
+        public void Push(T item)
         {
             if (items.Length == count)
             {
@@ -35,13 +35,8 @@ namespace Stack
         private void Resize()
         {
             var newLength = count * 2;
-            var newArray = new int[newLength];
+            var newArray = new T[newLength];
             Array.Copy(items, newArray, count*2);
-        }
-
-        public static void Main(string[] args)
-        {
-
         }
     }
 }

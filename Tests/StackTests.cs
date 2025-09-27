@@ -48,17 +48,11 @@ namespace Tests
         }
 
         [Test]
-        public void GivenStack_WhenPopNoItems_ReturnNull()
+        public void GivenEmptyStack_WhenTryToPopEmptyStack_ThenReturnNull()
         {
-            // arrange
             var stack = new Stack();
 
-            // act
-            stack.Push(null);
-            var lastItem = stack.Pop();
-
-            // assert
-            Assert.That(lastItem, Is.EqualTo(null));
+            Assert.Throws<InvalidOperationException>(() => stack.Pop());
         }
     }
 }
