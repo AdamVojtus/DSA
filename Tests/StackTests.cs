@@ -50,8 +50,10 @@ namespace Tests
         [Test]
         public void GivenEmptyStack_WhenTryToPopEmptyStack_ThenReturnNull()
         {
+            // arange
             var stack = new Stack();
 
+            // act/assert
             Assert.Throws<InvalidOperationException>(() => stack.Pop());
         }
     }

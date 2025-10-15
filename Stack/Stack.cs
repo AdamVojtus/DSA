@@ -1,5 +1,4 @@
-﻿
-namespace Stack
+﻿namespace Stack
 {
     public class Stack<T>
     {
@@ -16,27 +15,30 @@ namespace Stack
 
         public T Pop()
         {
-            var item = items[count];
-            Array.Clear(items, count, 1);
+            if (count == 0)
+                throw new InvalidOperationException("Stack is empty.");
+
             count--;
+            T item = items[count];
+            items[count] = default!;
             return item;
         }
 
         public void Push(T item)
         {
             if (items.Length == count)
-            {
                 Resize();
-            }
+
             items[count] = item;
             count++;
         }
 
         private void Resize()
         {
-            var newLength = count * 2;
-            var newArray = new T[newLength];
-            Array.Copy(items, newArray, count*2);
+            int newLength = items.Length * 2;
+            T[] newArray = new T[newLength];
+            Array.Copy(items, newArray, count);
+            items = newArray;
         }
     }
 }
