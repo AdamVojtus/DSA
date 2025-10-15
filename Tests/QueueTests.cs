@@ -1,5 +1,4 @@
-﻿using NUnit.Framework.Constraints;
-using System.Collections;
+﻿using System.Collections;
 
 namespace Tests
 {
@@ -45,17 +44,13 @@ namespace Tests
         }
 
         [Test]
-        public void GivenQueue_WhenNoKeys_ThenReturnNull()
+        public void GivenEmptyQueue_WhenDequeueAnEmptyQueue_ThrowsInvalidOperationException()
         {
             // arrange
             var queue = new Queue();
 
-            // act
-            queue.Enqueue(null);
-            var firstKey = queue.Dequeue();
-
-            // assert
-            Assert.That(firstKey, Is.EqualTo(null));
+            // act / assert
+            Assert.Throws<InvalidOperationException>(() => queue.Dequeue());
         }
     }
 }

@@ -1,33 +1,55 @@
-﻿namespace Queue
+﻿
+namespace Queue
 {
-    public class Queue
+    public class Queue<T>
     {
         private int count;
-        private int[] keys;
+        private T[] items;
+        private int head;
+        private int tail;
 
-        public int Count => count;
-
-        public Queue()
+        public Queue(int size = 4)
         {
-            count = 4;
+            items = new T[size];
+            count = 0;
+            head = 0;
+            tail = 0;
         }
 
-        public void Enqueue(int key)
+        public void Enqueue(T item)
         {
-            keys = new int[count];
-            keys[count] = key;
+            if (count == items.Length)
+            {
+                Resize();
+            }
+            items[tail] = item;
+            tail = (tail + 1);
+            count++;
+        }
+
+        public T Dequeue()
+        {
+            if (count == 0)
+            {
+                throw new InvalidOperationException("Queue is empty.");
+            }
+            T x = items[head];
+            items[head] = default!;
+            head = (head + 1) % items.Length;
             count--;
+            return x;
         }
 
-        public int Dequeue()
+        private void Resize()
         {
-            var key = keys[count];
-            Array.Clear(keys, count, 4);
-            return key;
-        }
-
-        public static void Main(string[] args)
-        {
+            T[] newItems = new T[items.Length * 2];
+            for (int i = 0; i < count; i++)
+            {
+                newItems[i] = items[(head + i) % items.Length];
+            }
+            items = newItems;
+            head = 0;
+            tail = count;
         }
     }
 }

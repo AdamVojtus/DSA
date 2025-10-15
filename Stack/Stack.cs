@@ -1,47 +1,44 @@
-﻿
-namespace Stack
+﻿namespace Stack
 {
-    public class Stack
+    public class Stack<T>
     {
         private int count;
-        private int[] items;
+        private T[] items;
 
         public int Count => count;
 
         public Stack(int size = 10)
         {
-            items = [size];
+            items = new T[size];
             count = 0;
         }
 
-        public int Pop()
+        public T Pop()
         {
-            var item = items[count];
-            Array.Clear(items, count, 1);
+            if (count == 0)
+                throw new InvalidOperationException("Stack is empty.");
+
             count--;
+            T item = items[count];
+            items[count] = default!;
             return item;
         }
 
-        public void Push(int item)
+        public void Push(T item)
         {
             if (items.Length == count)
-            {
                 Resize();
-            }
+
             items[count] = item;
             count++;
         }
 
         private void Resize()
         {
-            var newLength = count * 2;
-            var newArray = new int[newLength];
-            Array.Copy(items, newArray, count*2);
-        }
-
-        public static void Main(string[] args)
-        {
-
+            int newLength = items.Length * 2;
+            T[] newArray = new T[newLength];
+            Array.Copy(items, newArray, count);
+            items = newArray;
         }
     }
 }
