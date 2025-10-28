@@ -1,27 +1,26 @@
 ﻿namespace DynamicArray
 {
-    public class DynamicArray
+    public class DynamicArray<T>
     {
         private int size;
-        private int capacity = 10;
-        private Object[] array;
+        private T[] array;
 
         public int Size => size;
 
-        public DynamicArray()
+        public DynamicArray(int capacity = 10)
         {
-            array = new Object[capacity];
+            array = new T[capacity];
         }
 
         public DynamicArray(int capacity)
         {
             this.capacity = capacity;
-            array = new Object[capacity];
+            array = new T[capacity];
         }
 
-        public void Add(Object value)
+        public void Add(T value)
         {
-            if (size>= capacity)
+            if (size >= capacity)
             {
                 Grow();
             }
@@ -29,9 +28,9 @@
             size++;
         }
 
-        public void Insert(int index, Object value)
+        public void Insert(int index, T value)
         {
-            if(size>= capacity)
+            if (size >= capacity)
             {
                 Grow();
             }
@@ -43,19 +42,19 @@
             size++;
         }
 
-        public void Delete(Object value)
+        public void Delete(T value)
         {
             for (int i = 0; i < size; i++)
             {
-                if (array[i] == value)
+                if (Equals(array[i], value))
                 {
-                    for(int j = 0; j < (size - i - 1); j++)
+                    for (int j = 0; j < size - i - 1; j++)
                     {
-                        array[i +j] = array[i + j + 1];
+                        array[i + j] = array[i + j + 1];
                     }
-                    array[size - 1] = null;
+                    array[size - 1] = default!;
                     size--;
-                    if (size <=(int) (capacity/3))
+                    if (size <= capacity / 3)
                     {
                         Shrink();
                     }
@@ -64,11 +63,11 @@
             }
         }
 
-        public int Search(Object value)
+        public int Search(T value)
         {
             for (int i = 0; i < size; i++)
             {
-                if(array[i] == value)
+                if (Equals(array[i], value))
                 {
                     return i;
                 }
@@ -78,8 +77,8 @@
 
         private void Grow()
         {
-            int newCapacity = (int)(capacity * 2);
-            Object[] newArray = new Object[newCapacity];
+            int newCapacity = capacity * 2;
+            T[] newArray = new T[newCapacity];
 
             for (int i = 0; i < size; i++)
             {
@@ -91,8 +90,8 @@
 
         public void Shrink()
         {
-            int newCapacity = (int)(capacity / 2);
-            Object[] newArray = new Object[newCapacity];
+            int newCapacity = capacity / 2;
+            T[] newArray = new T[newCapacity];
 
             for (int i = 0; i < size; i++)
             {
