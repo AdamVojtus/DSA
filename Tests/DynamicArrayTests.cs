@@ -8,17 +8,17 @@ namespace Tests
         public void GivenDynamicArray_WhenInitialized_ThenArrayIsEmpty()
         {
             // arrange & act
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             // assert
-            Assert.That(array.Search("Zdechlak"), Is.EqualTo(-1));
+            Assert.That(array.Search("A"), Is.EqualTo(-1));
         }
 
         [Test]
         public void GivenDynamicArray_WhenAddCalled_ThenElementIsAppended()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             // act
             array.Add("A");
@@ -33,7 +33,7 @@ namespace Tests
         public void GivenDynamicArray_WhenInsertAtIndex_ThenElementIsInsertedAtCorrectPosition()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             array.Add("A");
             array.Add("B");
@@ -50,7 +50,7 @@ namespace Tests
         public void GivenDynamicArray_WhenInsertTriggersGrow_ThenCapacityIsIncreased()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray(1);
+            var array = new DynamicArray.DynamicArray<string>(1);
 
             // act
             array.Add("A");
@@ -64,7 +64,7 @@ namespace Tests
         public void GivenDynamicArray_WhenDeleteExistingValue_ThenValueIsRemovedAndArrayIsShifted()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             array.Add("A");
             array.Add("B");
@@ -81,11 +81,11 @@ namespace Tests
         public void GivenDynamicArray_WhenDeleteNonExistingValue_ThenArrayRemainsUnchanged()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
             array.Add("A");
 
             // act
-            array.Delete("Džonik");
+            array.Delete("B");
 
             // assert
             Assert.That(array.Size, Is.EqualTo(1));
@@ -95,7 +95,7 @@ namespace Tests
         public void GivenDynamicArray_WhenDeleteTriggersShrink_ThenCapacityIsReduced()
         {
             // arrange
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             array.Add("A");
             array.Add("B");
@@ -113,7 +113,7 @@ namespace Tests
         public void GivenDynamicArray_WhenSearchExistingValue_ThenReturnCorrectIndex()
         {
             // arrange / act
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
             array.Add("A");
 
             // assert
@@ -124,7 +124,7 @@ namespace Tests
         public void GivenDynamicArray_WhenSearchNonExistingValue_ThenReturnMinusOne()
         {
             // arrange / act
-            var array = new DynamicArray.DynamicArray();
+            var array = new DynamicArray.DynamicArray<string>(3);
 
             // assert
             Assert.That(array.Search("A"), Is.EqualTo(-1));

@@ -3,14 +3,10 @@
     public class DynamicArray<T>
     {
         private int size;
+        private int capacity;
         private T[] array;
 
         public int Size => size;
-
-        public DynamicArray(int capacity = 10)
-        {
-            array = new T[capacity];
-        }
 
         public DynamicArray(int capacity)
         {
