@@ -54,5 +54,37 @@ namespace Tests
             // act / assert
             Assert.Throws<InvalidOperationException>(() => list.Remove(""));
         }
+
+        [Test]
+        public void GivenLinkedList_WhenRemoveMiddleData_ThenMoveTo2()
+        {
+            // arrange
+            var list = new LinkedList.LinkedList<string>();
+            list.Push("A");
+            list.Push("B");
+            list.Push("C");
+
+            // act
+            list.Remove("B");
+
+            // assert
+            Assert.That(list.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void GivenLinkedList_WhenTryToRemoveAnNonExistingData_NodesAreStable()
+        {
+            // arrange
+            var list = new LinkedList.LinkedList<string>();
+            list.Push("A");
+            list.Push("B");
+            list.Push("C");
+
+            // act
+            list.Remove("D");
+
+            // assert
+            Assert.That(list.Count, Is.EqualTo(3));
+        }
     }
 }
