@@ -21,6 +21,7 @@
     <ProjectReference Include="..\DynamicArray\DynamicArray.csproj" />
     <ProjectReference Include="..\LinearSearch\LinearSearch.csproj" />
     <ProjectReference Include="..\LinkedList\LinkedList.csproj" />
+    <ProjectReference Include="..\XmlRecursion\XmlErrorComparer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
