@@ -8,21 +8,21 @@ namespace Tests
         public void GivenXmlErrorComparer_WhenCurrentHasSameValueAsStaged_ThenReturnFalse()
         {
             // arrange
-            var currentData = @"<Scenarios ErrorSource=""Torus"">
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+            var currentData = @"<Scenarios ErrorSource=""Error"">
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                  </Scenarios>";
 
-            var stagedData = @"<Scenarios ErrorSource=""Torus"">
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+            var stagedData = @"<Scenarios ErrorSource=""Error"">
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                  </Scenarios>";
 
@@ -41,17 +41,17 @@ namespace Tests
                                   <Scenario>
                                     <SubScenario />
                                   </Scenario>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                  </Scenarios>";
 
-            var stagedData = @"<Scenarios ErrorSource=""Torus"">
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+            var stagedData = @"<Scenarios ErrorSource=""Error"">
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                  </Scenarios>";
 
@@ -63,7 +63,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenXmlErrorComparer_WhenCurrentSubscenarioHasSameValueAsCombinedInStaged_ThenReturnFalse()
+        public void GivenXmlErrorComparer_WhenCurrentHasSameValuAsCombinedInStaged_ThenReturnFalse()
         {
             // arrange
             var currentData = @"<Scenarios>
@@ -71,19 +71,19 @@ namespace Tests
                                     <SubScenario />
                                   </Scenario>
                                   <Scenario>
-                                    <SubScenario ErrorSource=""Torus"" />
-                                    <SubScenario ErrorSource=""Torus"" />
-                                    <SubScenario ErrorSource=""Torus"" />
+                                    <SubScenario ErrorSource=""Error"" />
+                                    <SubScenario ErrorSource=""Error"" />
+                                    <SubScenario ErrorSource=""Error"" />
                                     <SubScenario />
                                   </Scenario>
                                  </Scenarios>";
 
             var stagedData = @"<Scenarios>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                   <Scenario>
-                                    <SubScenario ErrorSource=""Torus"" />
+                                    <SubScenario ErrorSource=""Error"" />
                                     <SubScenario />
                                     <SubScenario />
                                     <SubScenario />
@@ -98,7 +98,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenXmlErrorComparer_WhenUnfullScenarioHasLessValueThanFullScenarioWithAdditionInStaged_ThenReturnFalse()
+        public void GivenXmlErrorComparer_WhenCurrentHasLessValueThanFullScenarioInStaged_ThenReturnFalse()
         {
             // arrange
             var currentData = @"<Scenarios>
@@ -106,18 +106,18 @@ namespace Tests
                                     <SubScenario />
                                   </Scenario>
                                   <Scenario>
-                                    <SubScenario ErrorSource=""Torus"" />
-                                    <SubScenario ErrorSource=""Torus"" />
+                                    <SubScenario ErrorSource=""Error"" />
+                                    <SubScenario ErrorSource=""Error"" />
                                     <SubScenario />
                                   </Scenario>
                                  </Scenarios>";
 
             var stagedData = @"<Scenarios>
-                                  <Scenario ErrorSource=""Torus"">
-                                    <SubScenario ErrorSource=""Torus"" />
+                                  <Scenario ErrorSource=""Error"">
+                                    <SubScenario ErrorSource=""Error"" />
                                   </Scenario>
                                   <Scenario>
-                                    <SubScenario ErrorSource=""Torus"" />
+                                    <SubScenario ErrorSource=""Error"" />
                                     <SubScenario />
                                     <SubScenario />
                                   </Scenario>

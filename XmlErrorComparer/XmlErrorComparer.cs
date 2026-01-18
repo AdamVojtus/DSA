@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace XmlRecursion
+namespace XmlErrorComparer
 {
     public static class XmlErrorComparer
     {
@@ -22,7 +22,7 @@ namespace XmlRecursion
 
         private static int CountErrors(XElement node)
         {
-            var hasError = node.Attribute("ErrorSource")?.Value == "Torus";
+            var hasError = node.Attribute("ErrorSource")?.Value == "Error";
             if (hasError)
                 return node.HasElements ? node.Descendants("SubScenario").Count() : 1;
 
@@ -31,7 +31,7 @@ namespace XmlRecursion
 
         public static void CalculateErrorScore(XElement node, int depth, ref double score)
         {
-            if (node.Attribute("ErrorScore")?.Value == "Torus")
+            if (node.Attribute("ErrorScore")?.Value == "Error")
             {
                 score += CountErrors(node) * (1.0 / (depth + 1));
                 return;
