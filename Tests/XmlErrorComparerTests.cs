@@ -63,7 +63,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenXmlErrorComparer_WhenCurrentHasSameValuAsCombinedInStaged_ThenReturnFalse()
+        public void GivenXmlErrorComparer_WhenCurrentHasSameValueAsCombinedInStaged_ThenReturnFalse()
         {
             // arrange
             var currentData = @"<Scenarios>
