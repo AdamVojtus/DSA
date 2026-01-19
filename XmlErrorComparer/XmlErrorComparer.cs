@@ -31,7 +31,7 @@ namespace XmlErrorComparer
 
         public static void CalculateErrorScore(XElement node, int depth, ref double score)
         {
-            if (node.Attribute("ErrorScore")?.Value == "Error")
+            if (node.Attribute("ErrorSource")?.Value == "Error")
             {
                 score += CountErrors(node) * (1.0 / (depth + 1));
                 return;
