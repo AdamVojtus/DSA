@@ -1,4 +1,4 @@
-﻿using static XmlRecursion.XmlErrorComparer; 
+﻿using static XmlErrorComparer.XmlErrorComparer; 
 
 namespace Tests
 {
