@@ -1,4 +1,4 @@
-﻿namespace DynamicArray
+﻿namespace Arrays
 {
     public class DynamicArray<T>
     {
