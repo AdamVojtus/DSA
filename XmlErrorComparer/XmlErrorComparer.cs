@@ -28,17 +28,5 @@ namespace XmlErrorComparer
 
             return node.Elements().Select(CountErrors).Sum();
         }
-
-        public static void CalculateErrorScore(XElement node, int depth, ref double score)
-        {
-            if (node.Attribute("ErrorSource")?.Value == "Error")
-            {
-                score += CountErrors(node) * (1.0 / (depth + 1));
-                return;
-            }
-
-            foreach (var child in node.Elements())
-                CalculateErrorScore(child, depth + 1, ref score);
-        }
     }
 }
