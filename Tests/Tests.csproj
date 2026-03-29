@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Arrays\Arrays.csproj" />
-    <ProjectReference Include="..\CharacterRecognition\CharacterRecognition.csproj" />
+    <ProjectReference Include="..\CharacterRecognition\Strings.csproj" />
     <ProjectReference Include="..\LinearSearch\LinearSearch.csproj" />
     <ProjectReference Include="..\LinkedList\LinkedList.csproj" />
     <ProjectReference Include="..\XmlErrorComparer\XmlErrorComparer.csproj" />

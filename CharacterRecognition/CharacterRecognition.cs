@@ -1,26 +1,30 @@
-﻿namespace CharacterRecognition
+﻿namespace Strings
 {
     public class CharacterRecognition
     {
         public static bool IsCharacterRecognized(string availableCharacters, string possibleText)
         {
-            int[] counts = new int[256];
+            var availableCharactersWithCount = new Dictionary<char, int>();
 
             for (int i = 0; i < availableCharacters.Length; i++)
             {
-                counts[availableCharacters[i]]++;
+                var current = availableCharacters[i];
+                if (availableCharactersWithCount.ContainsKey(current))
+                    availableCharactersWithCount[current] += 1;
+                else
+                    availableCharactersWithCount[current] = 1;
             }
 
             for (int i = 0; i < possibleText.Length; i++)
             {
-                char current = possibleText[i];
+                var current = possibleText[i];
 
-                if (counts[current] == 0)
+                if (!availableCharactersWithCount.TryGetValue(current, out int count) || count == 0)
                 {
                     return false;
                 }
 
-                counts[current]--;
+                availableCharactersWithCount[current] = count - 1;
             }
 
             return true;

@@ -1,24 +1,74 @@
-﻿namespace Tests
+﻿using NUnit.Framework;
+
+namespace Tests
 {
     public class CharacterRecognitionTests
     {
+        private const string AvailableCharacters = "dcca";
+
         [Test]
-        public void TestIsCharacterRecognized()
+        public void IsCharacterRecognized_ValidExactMatch_ReturnsTrue()
         {
             // Arrange
-            var availableCharacters = "dcca";
-            var possibleText1 = "acdc";
-            var possibleText2 = "ac dc";
-            var possibleText3 = "acc";
-            var possibleText4 = "acDc";
-            var possibleText5 = "acca";
+            var possibleText = "acdc";
 
-            // Act & Assert
-            Assert.IsTrue(CharacterRecognition.CharacterRecognition.IsCharacterRecognized(availableCharacters, possibleText1));
-            Assert.IsFalse(CharacterRecognition.CharacterRecognition.IsCharacterRecognized(availableCharacters, possibleText2));
-            Assert.IsTrue(CharacterRecognition.CharacterRecognition.IsCharacterRecognized(availableCharacters, possibleText3));
-            Assert.IsFalse(CharacterRecognition.CharacterRecognition.IsCharacterRecognized(availableCharacters, possibleText4));
-            Assert.IsFalse(CharacterRecognition.CharacterRecognition.IsCharacterRecognized(availableCharacters, possibleText5));
+            // Act
+            var result = Strings.CharacterRecognition.IsCharacterRecognized(AvailableCharacters, possibleText);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsCharacterRecognized_TextContainsUnsupportedSpace_ReturnsFalse()
+        {
+            // Arrange
+            var possibleText = "ac dc";
+
+            // Act
+            var result = Strings.CharacterRecognition.IsCharacterRecognized(AvailableCharacters, possibleText);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void IsCharacterRecognized_TextIsPartialSubset_ReturnsTrue()
+        {
+            // Arrange
+            var possibleText = "acc";
+
+            // Act
+            var result = Strings.CharacterRecognition.IsCharacterRecognized(AvailableCharacters, possibleText);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsCharacterRecognized_TextIncludesUnsupportedUpperCase_ReturnsFalse()
+        {
+            // Arrange
+            var possibleText = "acDc";
+
+            // Act
+            var result = Strings.CharacterRecognition.IsCharacterRecognized(AvailableCharacters, possibleText);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void IsCharacterRecognized_OutnumberedUniqueCharacter_ReturnsFalse()
+        {
+            // Arrange
+            var possibleText = "acca";
+
+            // Act
+            var result = Strings.CharacterRecognition.IsCharacterRecognized(AvailableCharacters, possibleText);
+
+            // Assert
+            Assert.IsFalse(result);
         }
     }
 }
