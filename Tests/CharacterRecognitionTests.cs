@@ -1,13 +1,11 @@
-﻿using NUnit.Framework;
-
-namespace Tests
+﻿namespace Tests
 {
     public class CharacterRecognitionTests
     {
         private const string AvailableCharacters = "dcca";
 
         [Test]
-        public void IsCharacterRecognized_ValidExactMatch_ReturnsTrue()
+        public void GivenValidExactMatch_WhenCheckingRecognition_ThenReturnsTrue()
         {
             // Arrange
             var possibleText = "acdc";
@@ -20,7 +18,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsCharacterRecognized_TextContainsUnsupportedSpace_ReturnsFalse()
+        public void GivenTextWithUnsupportedSpace_WhenCheckingRecognition_ThenReturnsFalse()
         {
             // Arrange
             var possibleText = "ac dc";
@@ -33,7 +31,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsCharacterRecognized_TextIsPartialSubset_ReturnsTrue()
+        public void GivenTextIsPartialSubset_WhenCheckingRecognition_ThenReturnsTrue()
         {
             // Arrange
             var possibleText = "acc";
@@ -46,7 +44,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsCharacterRecognized_TextIncludesUnsupportedUpperCase_ReturnsFalse()
+        public void GivenTextWithUnsupportedUpperCase_WhenCheckingRecognition_ThenReturnsFalse()
         {
             // Arrange
             var possibleText = "acDc";
@@ -59,7 +57,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsCharacterRecognized_OutnumberedUniqueCharacter_ReturnsFalse()
+        public void GivenOutnumberedUniqueCharacter_WhenCheckingRecognition_ThenReturnsFalse()
         {
             // Arrange
             var possibleText = "acca";
