@@ -5,7 +5,7 @@ namespace Tests
     public class TournamentsTests
     {
         [Test]
-        public void WhenGivenTeam_AndIsAtHome_ThenReturnTrue()
+        public void GivenArray_WhenHomeTeamWins_ThenReturnTrue()
         {
             // arrange
             List<Match> matches = new List<Match>
@@ -26,30 +26,21 @@ namespace Tests
         }
 
         [Test]
-        public void WhenGivenTournament_ThenReturnCorrectWinner()
+        public void GivenArray_WhenIndexOutOfAllowed_ThenReturnFalse()
         {
+            // arrange
             List<Match> matches = new List<Match>
             {
-                new Match("a", "b"),
-                new Match("b", "c"),
-                new Match("c", "a")
+                new Match("TK", "CA"),
+                new Match("MV", "TK"),
+                new Match("CA", "MV")
             };
 
-            int[] results1 = { 1, 0, 1 };
-            int[] results2 = { 0, 0, 1 };
-            int[] results3 = { 1, 1, 0 };
-            int[] results4 = { 0, 1, 0 };
-
             var tournaments = new Tournaments();
-            var res1 = tournaments.WinnerOfTournament(matches, results1);
-            var res2 = tournaments.WinnerOfTournament(matches, results2);
-            var res3 = tournaments.WinnerOfTournament(matches, results3);
-            var res4 = tournaments.WinnerOfTournament(matches, results4);
+            int[] results = { -1, 0, 1 };
 
-            Assert.That(res1, Is.EqualTo("c"));
-            Assert.That(res2, Is.EqualTo("c"));
-            Assert.That(res3, Is.EqualTo("a"));
-            Assert.That(res4, Is.EqualTo("b"));
+            // act & assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => tournaments.WinnerOfTournament(matches, results));
         }
     }
 }

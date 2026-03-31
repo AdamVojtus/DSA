@@ -4,46 +4,41 @@
     {
         public string WinnerOfTournament(List<Match> matches, int[] results)
         {
-            var scores = new Dictionary<string, int>();
+            var allMatchesResults = new AllMatchesResults();
 
             for (int i = 0; i < matches.Count; i++)
             {
                 var match = matches[i];
-                var result = results[i];
-                string winnerName;
+                var resultIndex = results[i];
 
-                if (result == 1)
-                {
-                    winnerName = match.HomeTeam;
-                }
-                else
-                {
-                    winnerName = match.IncomingTeam;
-                }
-
-                if (scores.ContainsKey(winnerName))
-                {
-                    scores[winnerName] += 3;
-                }
-                else
-                {
-                    scores.Add(winnerName, 3);
-                }
+                var winnerName = match.GetWinner(resultIndex);
+                allMatchesResults.WinnerOfCurrentMatch(winnerName);
             }
 
-            string absoluteWinner = string.Empty;
-            int maxScore = -1;
+            return allMatchesResults.GetAbsoluteWinner();
+        }
 
-            foreach (var entry in scores)
+        public class AllMatchesResults
+        {
+            private readonly Dictionary<string, int> _values = new();
+
+            public void WinnerOfCurrentMatch(string teamName)
             {
-                if (entry.Value > maxScore)
+                if (_values.ContainsKey(teamName))
                 {
-                    maxScore = entry.Value;
-                    absoluteWinner = entry.Key;
+                    _values[teamName] += 1;
+                }
+                else
+                {
+                    _values.Add(teamName, 1);
                 }
             }
 
-            return absoluteWinner;
+            public string GetAbsoluteWinner()
+            {
+                var result = _values.MaxBy(x => x.Value).Key;
+                return result;
+            }
         }
     }
 
@@ -56,6 +51,23 @@
         {
             HomeTeam = homeTeam ?? throw new ArgumentNullException(nameof(homeTeam));
             IncomingTeam = incomingTeam ?? throw new ArgumentNullException(nameof(incomingTeam));
+        }
+
+        public string GetWinner(int index)
+        {
+            if (index != 0 && index != 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            if (index == 1)
+            {
+                return HomeTeam;
+            }
+            else
+            {
+                return IncomingTeam;
+            }
         }
     }
 }
