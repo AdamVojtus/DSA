@@ -5,7 +5,7 @@ namespace Tests
     public class TournamentsTests
     {
         [Test]
-        public void GivenArrayAndTargetSum_WhenPairExists_ThenReturnTrue()
+        public void GivenArray_WhenHomeTeamWins_ThenReturnTrue()
         {
             // arrange
             List<Match> matches = new List<Match>
@@ -26,7 +26,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenArrayAndTargetSum_WhenIndexOutOfAllowed_ThenReturnFalse()
+        public void GivenArray_WhenIndexOutOfAllowed_ThenReturnFalse()
         {
             // arrange
             List<Match> matches = new List<Match>
@@ -36,13 +36,11 @@ namespace Tests
                 new Match("CA", "MV")
             };
 
+            var tournaments = new Tournaments();
             int[] results = { -1, 0, 1 };
 
             // act & assert
-            foreach (var match in matches)
-            {
-                Assert.Throws<ArgumentOutOfRangeException>(() => match.GetWinner(results[0]));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(() => tournaments.WinnerOfTournament(matches, results));
         }
     }
 }

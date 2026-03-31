@@ -55,12 +55,9 @@
 
         public string GetWinner(int index)
         {
-            if (index != 0)
+            if (index != 0 && index != 1)
             {
-                if (index != 1)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(index));
-                }
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             if (index == 1)
