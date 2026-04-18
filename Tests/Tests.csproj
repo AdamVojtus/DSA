@@ -19,10 +19,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Arrays\Arrays.csproj" />
-    <ProjectReference Include="..\CharacterRecognition\Strings.csproj" />
     <ProjectReference Include="..\LinearSearch\LinearSearch.csproj" />
     <ProjectReference Include="..\LinkedList\LinkedList.csproj" />
     <ProjectReference Include="..\Strings\Strings.csproj" />
+    <ProjectReference Include="..\Trees\Trees.csproj" />
     <ProjectReference Include="..\XmlErrorComparer\XmlErrorComparer.csproj" />
   </ItemGroup>
 
