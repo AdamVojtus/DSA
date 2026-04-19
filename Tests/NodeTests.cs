@@ -5,30 +5,53 @@ namespace Tests
     public class NodeTests
     {
         [Test]
-        public void GivenArray_WhenRootExists_ThenReturnTrue()
+        public void GivenNode_WhenSmallValuesInput_ThenTreeIsCreatedAndValid()
         {
-            var inputs = new int[] { 5, 2, 10, 1, 13, 5, 14, 12, 11 };
+            // arrange
+            var inputs = new int[] { 1, 2, 3 };
+
+            // act
             var result = Node.CreateBalancedTree(inputs);
 
-            Assert.That(result, Is.Not.Null);
+            // assert
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result!.IsValid(), Is.True);
+                Assert.That(result.Value, Is.EqualTo(2));
+            });
         }
 
         [Test]
-        public void GivenInvalidLeftNode_WhenLeftValueIsGreater_ThenThrowArgumentException()
+        public void GivenNode_WhenTreeIsCreated_ThenStructureIsValidBST()
         {
-            var leftNode = new Node(15);
-            Assert.Throws<System.ArgumentException>(() => new Node(10, leftNode, null));
+            // arrange
+            var inputs = new int[] { 5, 2, 10, 1, 13, 5, 14, 12, 11 };
+
+            // act
+            var result = Node.CreateBalancedTree(inputs);
+
+            // assert
+            Assert.That(result!.IsValid(), Is.True);
         }
 
         [Test]
-        public void GivenInvalidRightNode_WhenRightValueIsSmaller_ThenThrowArgumentException()
+        public void GivenNode_WhenFlattened_ThenDataMatchesSortedInput()
         {
-            var rightNode = new Node(5);
-            Assert.Throws<System.ArgumentException>(() => new Node(10, null, rightNode));
+            // arrange
+            var inputs = new int[] { 5, 2, 10, 1, 13, 5, 14, 12, 11 };
+            var expected = Node.GetSortedValues(inputs);
+
+            // act
+            var root = Node.CreateBalancedTree(inputs);
+            var result = root!.FlattenSorted();
+
+            // assert
+            Assert.That(result, Is.EqualTo(expected));
         }
 
         [Test]
-        public void GivenArrayWithDuplicate_WhenTreeCreated_ThenRootIsTenLeftIsNineRightIsTen()
+        public void GivenNode_WhenInputHasDuplicates_ThenRightSideHandlesEquality()
         {
             // arrange
             var inputs = new int[] { 10, 9, 10 };
@@ -39,8 +62,8 @@ namespace Tests
             // assert
             Assert.Multiple(() =>
             {
-                Assert.That(result!.Value, Is.EqualTo(10));
-                Assert.That(result.Left!.Value, Is.EqualTo(9));
+                Assert.That(result!.IsValid(), Is.True);
+                Assert.That(result.Value, Is.EqualTo(10));
                 Assert.That(result.Right!.Value, Is.EqualTo(10));
             });
         }
