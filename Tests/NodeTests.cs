@@ -36,7 +36,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenNode_WhenFlattened_ThenDataMatchesSortedInput()
+        public void GivenNode_WhenFlattened_ThenDataMatchesSortedUniqueInput()
         {
             // arrange
             var inputs = new int[] { 5, 2, 10, 1, 13, 5, 14, 12, 11 };
@@ -51,7 +51,7 @@ namespace Tests
         }
 
         [Test]
-        public void GivenNode_WhenInputHasDuplicates_ThenRightSideHandlesEquality()
+        public void GivenNode_WhenInputHasDuplicates_ThenTreeContainsOnlyUniqueValues()
         {
             // arrange
             var inputs = new int[] { 10, 9, 10 };
@@ -62,10 +62,22 @@ namespace Tests
             // assert
             Assert.Multiple(() =>
             {
+                Assert.That(result, Is.Not.Null);
                 Assert.That(result!.IsValid(), Is.True);
                 Assert.That(result.Value, Is.EqualTo(10));
-                Assert.That(result.Right!.Value, Is.EqualTo(10));
+                Assert.That(result.Left!.Value, Is.EqualTo(9));
+                Assert.That(result.Right, Is.Null);
             });
+        }
+
+        [Test]
+        public void GivenNode_WhenRightChildIsInvalid_ThenThrowArgumentException()
+        {
+            // arrange
+            var invalidRightChild = new Node(10);
+
+            // act/assert
+            Assert.Throws<System.ArgumentException>(() => new Node(10, null, invalidRightChild));
         }
     }
 }
