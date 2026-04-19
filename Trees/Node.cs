@@ -2,9 +2,9 @@
 {
     public class Node
     {
-        public int Value { get; set; }
-        public Node? Left { get; set; }
-        public Node? Right { get; set; }
+        public int Value { get; }
+        public Node? Left { get; }
+        public Node? Right { get; }
 
         public Node(int value, Node? left = null, Node? right = null)
         {
@@ -25,26 +25,19 @@
 
         public static Node? CreateBalancedTree(int[] inputs)
         {
-            int[] sortedInput = GetSortedValues(inputs);
+            if (inputs == null || inputs.Length == 0) return null;
 
-            for (int i = 0; i < sortedInput.Length; i++)
-            {
-               if (sortedInput[i] > sortedInput.Length)
-               {
-                    return new Node(sortedInput[i], CreateBalancedTree(sortedInput[..i]), CreateBalancedTree(sortedInput[(i + 1)..]));
-               }
-            }
+            int[] sorted = GetSortedValues(inputs);
 
-            return null;
+            int mid = sorted.Length / 2;
+
+            return new Node(
+                sorted[mid],
+                CreateBalancedTree(sorted[..mid]),
+                CreateBalancedTree(sorted[(mid + 1)..])
+            );
         }
 
-        public static int[] GetSortedValues(int[] input)
-        {
-            int[] sortedValues = (int[])input.Clone();
-
-            Array.Sort(sortedValues);
-
-            return sortedValues;
-        }
+        public static int[] GetSortedValues(int[] input) => input.OrderBy(x => x).ToArray();
     }
 }
